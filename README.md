@@ -1,68 +1,77 @@
-# GitVerse Next.js
+# GitVerse
 
-Transform Git repositories into interactive visual knowledge graphs with AI-powered insights - built with Next.js 14.
+Turn any GitHub repo into an interactive map of its architecture, modules, and risks.
 
-## 🚀 Features
+GitVerse is built for the moment you open a new codebase and ask: “Where do I start?”
 
-- **Repository Structure Visualization** - Interactive tree graphs of entire repository structure
-- **Branch & Commit Graph Engine** - Visualize all branches, commits, and merges
-- **Contributor Intelligence System** - Visual mapping of contributor activities and patterns
-- **AI-Powered Repository Assistant** - Natural language queries powered by Gemini AI
-- **Coding Standards Analysis** - Automated analysis of naming conventions and best practices
-- **Multi-Platform Support** - Works with GitHub, GitLab, and Bitbucket
+## Pitch
 
-## 🛠️ Tech Stack
+### Problem
 
-- **Framework:** Next.js 14 (App Router)
-- **Frontend:** React 18, TypeScript, Tailwind CSS
-- **Backend:** Next.js API Routes
-- **Database:** PostgreSQL with Prisma ORM (NeonDB)
-- **AI:** Google Gemini AI
-- **Visualizations:** D3.js, Recharts
-- **Icons:** Lucide React
-- **Authentication:** JWT with bcrypt
+Open-source and internal repos are hard to contribute to because context is scattered across folders, commits, and tribal knowledge.
 
-## 📦 Installation
+### Why now
 
-1. Navigate to the project directory:
+Repos are larger, teams are more distributed, and AI can finally summarize + connect the dots fast enough to change the contributor experience.
 
-```bash
-cd gitverse-nextjs
-```
+### Solution
 
-2. Install dependencies:
+Paste a repo → GitVerse builds a visual map + AI onboarding so contributors can understand architecture and pick a starting point in minutes.
+
+### Impact
+
+- Faster onboarding for new contributors
+- Clearer ownership and hotspots
+- Better PR quality (less back-and-forth)
+
+## “Repo-to-Map in 10 seconds” (MVP flow)
+
+1. Paste a GitHub URL
+2. GitVerse generates:
+   - Architecture / module map (visual)
+   - Modules + dependencies
+   - Top risks / hotspots
+   - 3 concrete improvement suggestions
+3. Click a module → ask AI: “What does this do?” “Where should I start contributing?”
+
+## What you can do today
+
+- Visualize repository structure and key paths
+- Explore commits/branches and contributor activity
+- Ask AI questions about files, folders, and architecture
+- Generate analysis jobs and track progress
+
+## Quickstart (local dev)
 
 ```bash
 npm install
-```
-
-3. Set up environment variables:
-
-```bash
-cp .env.local.example .env.local
-```
-
-Edit `.env.local` and add your configuration:
-
-- `DATABASE_URL` - NeonDB PostgreSQL connection string
-- `JWT_SECRET` - Secret key for JWT token generation
-- `GEMINI_API_KEY` - Google Gemini AI API key
-- GitHub/GitLab/Bitbucket API tokens (optional for integration features)
-
-4. Set up the database:
-
-```bash
+cp .env.example .env.local
+cp .env.local .env
 npm run prisma:generate
 npm run prisma:migrate
-```
-
-5. Start the development server:
-
-```bash
 npm run dev
 ```
 
-The application will be available at `http://localhost:3000`
+Open http://localhost:3000
+
+## Contribution-first onboarding (the hackathon angle)
+
+GitVerse is designed to make contributing to unfamiliar repos easier:
+
+- “How do I run this project?”
+- “Where is auth?”
+- “Explain this folder like I’m new.”
+- “Give me 3 beginner-friendly issues.”
+
+That’s the MVP: turn repo complexity into a contributor roadmap.
+
+## Tech stack
+
+- Next.js 14 (App Router), React, TypeScript, Tailwind
+- Prisma + Postgres (Neon)
+- Gemini for AI analysis
+- D3/Recharts for visualizations
+- Auth: NextAuth (Google) + credentials
 
 ## 🏗️ Project Structure
 
