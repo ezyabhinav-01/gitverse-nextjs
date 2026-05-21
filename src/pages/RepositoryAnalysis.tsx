@@ -225,9 +225,7 @@ export default function RepositoryAnalysis() {
     <DashboardLayout>
       <div className="space-y-6">
         {loading ? (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">Loading repository...</p>
-          </div>
+          <RepositoryAnalysisSkeleton />
         ) : !job ? (
           <EmptyState
             icon={Activity}
