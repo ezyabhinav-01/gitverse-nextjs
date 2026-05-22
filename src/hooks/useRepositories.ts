@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import type { PaginatedResponse } from "@/types/pagination";
 
 export interface Repository {
@@ -64,9 +64,9 @@ export function useRepositories({ limit = DEFAULT_LIMIT } = {}): UseRepositories
   }, [limit, refreshKey]);
 
   const loadMore = useCallback(() => {
-    if (!hasMore || isLoadingMore || isLoading) return;
-
+    if (!hasMore || isLoadingMoreRef.current || isLoading) return ;
     setIsLoadingMore(true);
+    isLoadingMoreRef.current = true;
     setError(null);
 
     const params = new URLSearchParams({ limit: String(limit) });
@@ -87,7 +87,10 @@ export function useRepositories({ limit = DEFAULT_LIMIT } = {}): UseRepositories
         setHasMore(json.hasMore);
       })
       .catch((err: Error) => setError(err.message))
-      .finally(() => setIsLoadingMore(false));
+      .finally(() => {
+  isLoadingMoreRef.current = false;
+  setIsLoadingMore(false);
+});
   }, [cursor, hasMore, isLoading, isLoadingMore, limit]);
 
   const refresh = useCallback(() => setRefreshKey((k) => k + 1), []);
