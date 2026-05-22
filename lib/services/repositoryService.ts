@@ -641,7 +641,7 @@ interface GetRepositoriesOptions {
 export async function getRepositories({ userId, limit, cursor }: GetRepositoriesOptions) {
   return prisma.repository.findMany({
     where: { userId },
-    orderBy: { createdAt: "desc" },
+    orderBy: [{ createdAt: "desc" }, { id: "desc" }],
     take: limit,
     ...(cursor ? { cursor: { id: parseInt(cursor) }, skip: 1 } : {}),
     include: {
