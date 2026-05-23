@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { startAnalysisWorkerLoop } from '../../../../scripts/analysisWorker';
+import { startAnalysisWorkerLoop } from '../../../../../scripts/analysisWorker';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300; // max Vercel function duration (if supported by plan)
@@ -18,16 +18,15 @@ export async function GET(request: Request) {
 
   try {
     // Run the worker loop in "once" mode so it returns after one pass through the queue
-    const metrics = await startAnalysisWorkerLoop({ 
+    await startAnalysisWorkerLoop({ 
       once: true
     });
     
-    console.log(`Finished analysis cron run. Summary:`, metrics);
+    console.log(`Finished analysis cron run.`);
     
     return NextResponse.json({ 
-      success: metrics.success, 
-      message: 'Analysis worker execution completed',
-      metrics
+      success: true, 
+      message: 'Analysis worker execution completed'
     });
   } catch (error: any) {
     console.error('run-analysis cron error:', error instanceof Error ? error.message : "Unknown error");
